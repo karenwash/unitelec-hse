@@ -1028,18 +1028,22 @@ async function enviarInspeccion() {
       body: JSON.stringify(campos)
     });
 
-    if (response.ok) {
-      document.getElementById('loading').classList.remove('visible');
-      document.getElementById('form-screen').style.display = 'none';
-      limpiarBorrador();
-      const ss = document.getElementById('success-screen');
-      ss.style.display = 'flex';
-      ss.style.alignItems = 'center';
-      ss.style.justifyContent = 'center';
-      document.getElementById('success-codigo').textContent = '¡Inspección registrada exitosamente!';
-    } else {
-      throw new Error('Error al enviar al servidor. Intenta nuevamente.');
-    }
+// Enviar a Make
+    fetch(MAKE_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(campos)
+    });
+
+    // Mostrar éxito inmediatamente sin esperar respuesta
+    document.getElementById('loading').classList.remove('visible');
+    document.getElementById('form-screen').style.display = 'none';
+    limpiarBorrador();
+    const ss = document.getElementById('success-screen');
+    ss.style.display = 'flex';
+    ss.style.alignItems = 'center';
+    ss.style.justifyContent = 'center';
+    document.getElementById('success-codigo').textContent = '¡Inspección registrada exitosamente!';
 
   } catch (err) {
     document.getElementById('loading').classList.remove('visible');
