@@ -5,208 +5,77 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inspección SST - UNITELEC</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: Arial, sans-serif; background: #f0f4f8; color: #333; font-size: 14px; }
-
-  /* LOGIN */
-  #login-screen {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url('fondo.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-.login-box {
-    background: rgba(255,255,255,0.92);
-    border-radius: 12px;
-    padding: 40px;
-    width: 100%;
-    max-width: 480px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    text-align: center;
-    backdrop-filter: blur(8px);
-  }
-  .login-logo { font-size: 28px; font-weight: bold; color: #1F4E79; margin-bottom: 4px; }
-  .login-subtitle { color: #666; font-size: 13px; margin-bottom: 30px; }
-  .login-box h2 { color: #1F4E79; margin-bottom: 20px; font-size: 18px; }
-  .login-box input, .login-box select {
-    width: 100%; padding: 12px 16px; border: 2px solid #ddd;
-    border-radius: 8px; font-size: 14px; margin-bottom: 12px; transition: border-color 0.3s;
-  }
-  .login-box input:focus, .login-box select:focus { outline: none; border-color: #1F4E79; }
-  .btn-login {
-    width: 100%; padding: 14px; background: #1F4E79; color: white;
-    border: none; border-radius: 8px; font-size: 16px; font-weight: bold;
-    cursor: pointer; transition: background 0.3s;
-  }
-  .btn-login:hover { background: #2E75B6; }
-  .login-error { color: #C55A11; font-size: 13px; margin-top: 12px; display: none; }
-
-  /* FORM */
-  #form-screen { display: none; }
-  .header {
-    background: #1F4E79; color: white; padding: 16px 20px;
-    display: flex; align-items: center; justify-content: space-between;
-    position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  }
-  .header-logo { font-size: 20px; font-weight: bold; }
-  .header-title { font-size: 14px; opacity: 0.9; }
-  .header-user { font-size: 12px; opacity: 0.8; }
-  .btn-logout {
-    background: rgba(255,255,255,0.2); color: white;
-    border: 1px solid rgba(255,255,255,0.4); padding: 6px 14px;
-    border-radius: 6px; cursor: pointer; font-size: 12px;
-  }
-  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-
-  .progress-bar { background: #e0e0e0; border-radius: 10px; height: 8px; margin-bottom: 20px; overflow: hidden; }
-  .progress-fill { background: linear-gradient(90deg, #1F4E79, #2E75B6); height: 100%; border-radius: 10px; transition: width 0.5s; width: 0%; }
-
-  .card { background: white; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-  .card-title { font-size: 16px; font-weight: bold; color: #1F4E79; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #1F4E79; }
-
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
-  .form-group { display: flex; flex-direction: column; gap: 4px; }
-  .form-group.full { grid-column: 1 / -1; }
-  .form-group label { font-size: 12px; font-weight: bold; color: #555; text-transform: uppercase; }
-  .form-group input, .form-group select, .form-group textarea {
-    padding: 10px 12px; border: 1.5px solid #ddd; border-radius: 6px;
-    font-size: 14px; transition: border-color 0.3s; font-family: Arial, sans-serif;
-  }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #1F4E79; }
-  .form-group textarea { resize: vertical; min-height: 80px; }
-
-  .seccion-header {
-    border-radius: 8px; padding: 14px 18px; margin-bottom: 16px;
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
-  }
-  .seccion-vg { background: #1F4E79; color: white; }
-  .seccion-ge { background: #C55A11; color: white; }
-  .seccion-re { background: #6B2C91; color: white; }
-  .seccion-titulo { font-size: 15px; font-weight: bold; }
-.seccion-toggle {
-  cursor: pointer;
-  user-select: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
+  border-color:#2D6CDF;
+  background:white;
 }
 
-.seccion-arrow {
-  font-size: 20px;
-  transition: transform 0.3s;
-  margin-left: 10px;
+.file-upload input{
+  display:none;
 }
 
-.seccion-arrow.collapsed {
-  transform: rotate(-90deg);
+.file-upload-label{
+  font-size:14px;
+  color:#64748B;
+  font-weight:600;
 }
 
-.seccion-content {
-  transition: all 0.3s ease;
-  overflow: hidden;
+.file-preview{
+  margin-top:16px;
+  max-width:100%;
+  max-height:180px;
+  border-radius:18px;
+  display:none;
 }
 
-.seccion-content.collapsed {
-  display: none;
-}
-.draft-banner {
-  background: #FFF3CD;
-  border: 1px solid #FFC107;
-  border-radius: 8px;
-  padding: 10px 16px;
-  margin-bottom: 16px;
-  display: none;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-.draft-banner.visible { display: flex; }
-.draft-banner span { font-size: 13px; color: #856404; font-weight: bold; }
-.btn-clear-draft {
-  padding: 4px 12px;
-  background: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-}
-  .badge-count { background: rgba(255,255,255,0.3); padding: 2px 8px; border-radius: 10px; font-size: 12px; margin-left: 8px; }
+/* BOTON ENVIAR */
 
-  .estado-general-select {
-    padding: 8px 12px; border-radius: 6px; border: 2px solid rgba(255,255,255,0.5);
-    background: rgba(255,255,255,0.15); color: white; font-size: 13px;
-    font-weight: bold; cursor: pointer; min-width: 200px;
+.btn-enviar{
+  width:100%;
+  padding:18px;
+  background:linear-gradient(135deg,#163B69,#2D6CDF);
+  color:white;
+  border:none;
+  border-radius:18px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+  transition:0.25s;
+}
+
+.btn-enviar:hover{
+  transform:translateY(-2px);
+  box-shadow:0 15px 30px rgba(45,108,223,0.25);
+}
+
+.btn-enviar:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+  .header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:16px;
+    padding:20px;
   }
-  .estado-general-select option { background: #333; color: white; }
 
-  .item-card {
-    background: #fafafa; border: 1.5px solid #e8e8e8;
-    border-radius: 8px; padding: 14px; margin-bottom: 10px; transition: border-color 0.3s;
+  .item-extra{
+    grid-template-columns:1fr;
   }
-  .item-card:hover { border-color: #1F4E79; }
-  .item-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
-  .item-codigo { background: #1F4E79; color: white; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; white-space: nowrap; flex-shrink: 0; }
-  .item-codigo-ge { background: #C55A11; }
-  .item-codigo-re { background: #6B2C91; }
-  .item-descripcion { font-size: 13px; color: #444; line-height: 1.5; }
 
-  .item-respuesta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
-  .btn-respuesta { padding: 8px 16px; border: 2px solid #ddd; border-radius: 20px; background: white; cursor: pointer; font-size: 13px; font-weight: bold; transition: all 0.2s; color: #555; }
-  .btn-respuesta.cumple.active { background: #1E6B3C; border-color: #1E6B3C; color: white; }
-  .btn-respuesta.nocumple.active { background: #C00000; border-color: #C00000; color: white; }
-  .btn-respuesta.na.active { background: #666; border-color: #666; color: white; }
+  .card{
+    padding:22px;
+  }
 
-  .item-extra { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
-  @media (max-width: 600px) { .item-extra { grid-template-columns: 1fr; } }
-  .item-obs label { font-size: 11px; color: #888; font-weight: bold; margin-bottom: 4px; display: block; }
-  .item-obs textarea { width: 100%; padding: 8px; border: 1.5px solid #ddd; border-radius: 6px; font-size: 12px; resize: vertical; min-height: 60px; font-family: Arial, sans-serif; }
+  .container{
+    padding:0 14px;
+  }
 
-  .evidencia-toggle { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-  .evidencia-toggle label { font-size: 12px; color: #666; font-weight: bold; }
-  .toggle-btn { display: flex; gap: 6px; }
-  .toggle-btn button { padding: 4px 12px; border-radius: 12px; border: 1.5px solid #ddd; background: white; cursor: pointer; font-size: 11px; transition: all 0.2s; }
-  .toggle-btn button.active-si { background: #1E6B3C; border-color: #1E6B3C; color: white; }
-  .toggle-btn button.active-no { background: #999; border-color: #999; color: white; }
-  .evidencia-section { display: none; }
-  .evidencia-section.visible { display: block; }
-  .file-upload { border: 2px dashed #ccc; border-radius: 6px; padding: 12px; text-align: center; cursor: pointer; background: white; transition: border-color 0.3s; }
-  .file-upload:hover { border-color: #1F4E79; }
-  .file-upload input { display: none; }
-  .file-upload-label { font-size: 12px; color: #888; cursor: pointer; display: block; }
-  .file-preview { max-width: 100%; max-height: 120px; border-radius: 4px; margin-top: 8px; display: none; }
-
-  .firma-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  @media (max-width: 600px) { .firma-container { grid-template-columns: 1fr; } }
-  .firma-box { border: 2px solid #ddd; border-radius: 8px; overflow: hidden; }
-  .firma-titulo { background: #1F4E79; color: white; padding: 10px; text-align: center; font-weight: bold; font-size: 13px; }
-  canvas { width: 100%; height: 150px; cursor: crosshair; touch-action: none; display: block; }
-  .firma-actions { display: flex; gap: 8px; padding: 8px; background: #f5f5f5; justify-content: flex-end; }
-  .btn-limpiar { padding: 6px 14px; background: #C55A11; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; }
-
-  .btn-enviar { width: 100%; padding: 18px; background: #1E6B3C; color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.3s; margin-top: 10px; }
-  .btn-enviar:hover { background: #155c32; }
-  .btn-enviar:disabled { background: #999; cursor: not-allowed; }
-
-  #success-screen { display: none; min-height: 100vh; background: linear-gradient(135deg, #1E6B3C, #27ae60); align-items: center; justify-content: center; }
-  .success-box { background: white; border-radius: 16px; padding: 50px 40px; text-align: center; max-width: 450px; width: 90%; }
-  .success-icon { font-size: 60px; margin-bottom: 20px; }
-  .success-title { font-size: 24px; font-weight: bold; color: #1E6B3C; margin-bottom: 10px; }
-  .success-msg { color: #666; margin-bottom: 20px; }
-  .success-codigo { font-size: 18px; font-weight: bold; color: #1F4E79; }
-  .btn-nueva { margin-top: 24px; padding: 14px 30px; background: #1F4E79; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
-
-  .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
-  .loading-overlay.visible { display: flex; }
-  .spinner { width: 50px; height: 50px; border: 5px solid rgba(255,255,255,0.3); border-top: 5px solid white; border-radius: 50%; animation: spin 1s linear infinite; }
- .loading-text { color: white; font-size: 16px; font-weight: bold; }
-  @keyframes spin { to { transform: rotate(360deg); } }
+}
 </style>
 </head>
 <body>
@@ -219,30 +88,24 @@
 <!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
-<img src="logo.png" alt="UNITELEC" style="width:250px;margin-bottom:10px;" onerror="this.style.display='none'" />
-<div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:16px;">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg" width="28" height="28" />
-  <span style="color:#0078D4;font-weight:bold;font-size:16px;">Outlook</span>
-</div>
-<h2>Inicia sesión para continuar</h2>
-<div style="text-align:left;margin-bottom:4px;">
-  <label style="font-size:12px;font-weight:bold;color:#333;text-transform:uppercase;letter-spacing:1px;">CORREO CORPORATIVO *</label>
-</div>
-<div style="position:relative;">
-  <span style="position:absolute;left:12px;top:13px;color:#555;">✉</span>
-  <input type="email" id="login-email" placeholder="@unitelec.com.pe" style="width:100%;padding:12px 12px 12px 36px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:12px;" />
-</div>
-<div style="position:relative;">
-  <input type="password" id="login-password" placeholder="Introduce tu contraseña" style="width:100%;padding:12px 40px 12px 16px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:12px;" />
-  <span id="ojo" onclick="togglePassword()" style="position:absolute;right:12px;top:13px;cursor:pointer;">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2">
-      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-      <circle cx="12" cy="12" r="3"/>
-    </svg>
-  </span>
-</div>
-    <button class="btn-login" onclick="login()" style="background:#0D1B2A;border-radius:8px;font-size:16px;letter-spacing:1px;">Iniciar sesión</button>
+
+    <img src="logo.png" alt="UNITELEC" class="login-logo" onerror="this.style.display='none'" />
+
+    <div class="login-title">UNITELEC HSE</div>
+    <div class="login-subtitle">Inspección de Seguridad y Salud</div>
+
+    <label>Correo corporativo</label>
+    <input type="email" id="login-email" placeholder="usuario@unitelec.com.pe">
+
+    <label>Contraseña</label>
+    <input type="password" id="login-password" placeholder="••••••••">
+
+    <button class="btn-login" onclick="login()">
+      Iniciar sesión
+    </button>
+
     <div class="login-error" id="login-error"></div>
+
   </div>
 </div>
 
