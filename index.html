@@ -981,8 +981,9 @@ function itemHTML(item, tipo) {
             </div>
           </div>
 <div class="evidencia-section" id="evid-${item.id}">
-  <div class="file-upload" onclick="document.getElementById('file-${item.id}').click()">
-
+  <div class="file-upload" 
+  onclick="document.getElementById('file-${item.id}').click()"
+>
     <div class="upload-icon">☁️</div>
 
     <div class="upload-title">
@@ -1000,14 +1001,28 @@ function itemHTML(item, tipo) {
       onchange="previewImg('${item.id}',this)"
     />
 
-    <img id="prev-${item.id}" class="file-preview" />
+<div class="preview-wrapper" id="wrap-${item.id}">
+  <button 
+    type="button"
+    class="remove-preview"
+    onclick="removeImg('${item.id}')"
+  >
+    ✕
+  </button>
+  <img id="prev-${item.id}" 
+  class="file-preview"
+  >
+        </div>
+
+      </div>
+
+    </div>
 
   </div>
+
 </div>
-        </div>
-      </div>
-    </div>`;
-}
+
+</div>`;
 
 // ─── RESPUESTAS ───
 function setResp(id, val) {
@@ -1044,10 +1059,21 @@ function previewImg(id, input) {
     reader.onload = e => {
       const p = document.getElementById(`prev-${id}`);
       p.src = e.target.result;
-      p.style.display = 'block';
+      document.getElementById(`wrap-${id}`).style.display = 'block';
     };
     reader.readAsDataURL(input.files[0]);
   }
+}
+ function removeImg(id) {
+
+  const input = document.getElementById(`file-${id}`);
+  const preview = document.getElementById(`prev-${id}`);
+  const wrapper = document.getElementById(`wrap-${id}`);
+
+  input.value = '';
+  preview.src = '';
+
+  wrapper.style.display = 'none';
 }
 
 // ─── CANVAS FIRMAS ───
