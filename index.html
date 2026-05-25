@@ -980,19 +980,30 @@ function itemHTML(item, tipo) {
               <button id="eno-${item.id}" class="active-no" onclick="toggleEvid('${item.id}',false)">No</button>
             </div>
           </div>
-          <div class="evidencia-section" id="evid-${item.id}">
-            <div class="file-upload" onclick="document.getElementById('file-${item.id}').click()">
-            <div class="upload-icon">☁️</div>
-            <div class="upload-title">
-            Arrastra tu evidencia aquí
-         </div>
-          <div class="upload-subtitle">
-    o haz clic para seleccionar una imagen
+<div class="evidencia-section" id="evid-${item.id}">
+  <div class="file-upload" onclick="document.getElementById('file-${item.id}').click()">
+
+    <div class="upload-icon">☁️</div>
+
+    <div class="upload-title">
+      Arrastra tu evidencia aquí
+    </div>
+
+    <div class="upload-subtitle">
+      o haz clic para seleccionar una imagen
+    </div>
+
+    <input 
+      type="file"
+      id="file-${item.id}"
+      accept="image/*"
+      onchange="previewImg('${item.id}',this)"
+    />
+
+    <img id="prev-${item.id}" class="file-preview" />
+
   </div>
-              <input type="file" id="file-${item.id}" accept="image/*" onchange="previewImg('${item.id}',this)"
-              <img id="prev-${item.id}" class="file-preview" />
-            </div>
-          </div>
+</div>
         </div>
       </div>
     </div>`;
