@@ -263,31 +263,84 @@
 
 <!-- LOGIN -->
 <div id="login-screen">
-  <div class="login-box">
-<img src="logo.png" alt="UNITELEC" style="width:250px;margin-bottom:10px;" onerror="this.style.display='none'" />
-<div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:16px;">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg" width="28" height="28" />
-  <span style="color:#0078D4;font-weight:bold;font-size:16px;">Outlook</span>
-</div>
-<h2>Inicia sesión para continuar</h2>
-<div style="text-align:left;margin-bottom:4px;">
-  <label style="font-size:12px;font-weight:bold;color:#333;text-transform:uppercase;letter-spacing:1px;">CORREO CORPORATIVO *</label>
-</div>
-<div style="position:relative;">
-  <span style="position:absolute;left:12px;top:13px;color:#555;">✉</span>
-  <input type="email" id="login-email" placeholder="@unitelec.com.pe" style="width:100%;padding:12px 12px 12px 36px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:12px;" />
-</div>
-<div style="position:relative;">
-  <input type="password" id="login-password" placeholder="Introduce tu contraseña" style="width:100%;padding:12px 40px 12px 16px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:12px;" />
-  <span id="ojo" onclick="togglePassword()" style="position:absolute;right:12px;top:13px;cursor:pointer;">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2">
-      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-      <circle cx="12" cy="12" r="3"/>
-    </svg>
-  </span>
-</div>
-    <button class="btn-login" onclick="login()" style="background:#0D1B2A;border-radius:8px;font-size:16px;letter-spacing:1px;">Iniciar sesión</button>
-    <div class="login-error" id="login-error"></div>
+  <div class="login-bg"></div>
+  <div class="login-overlay"></div>
+  <div class="login-glow-1"></div>
+  <div class="login-glow-2"></div>
+
+  <div class="login-header">
+    <img src="logo.png" alt="UNITELEC" onerror="this.style.display='none'" />
+    <span class="login-header-text">Sistema HSE</span>
+  </div>
+
+  <div class="login-main">
+    <div class="login-left">
+      <div class="login-left-title">Plataforma Corporativa</div>
+      <h1>Sistema de<br><span>Inspección de</span><br>Seguridad y Salud</h1>
+      <p class="login-left-desc">Gestione sus inspecciones HSE de manera eficiente, segura y profesional.</p>
+      <div class="login-features">
+        <div class="login-feature">
+          <div class="login-feature-icon">🛡️</div>
+          <div class="login-feature-text"><strong>Seguridad</strong><span>Protección de datos garantizada</span></div>
+        </div>
+        <div class="login-feature">
+          <div class="login-feature-icon">📊</div>
+          <div class="login-feature-text"><strong>Eficiencia</strong><span>Optimice procesos y tiempos</span></div>
+        </div>
+        <div class="login-feature">
+          <div class="login-feature-icon">✅</div>
+          <div class="login-feature-text"><strong>Cumplimiento</strong><span>Estándares HSE internacionales</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-card">
+      <div class="login-card-logo">
+        <img src="logo.png" alt="UNITELEC" onerror="this.style.display='none';document.getElementById('logo-fb').style.display='block'" />
+        <div id="logo-fb" class="login-card-logo-fallback" style="display:none;">UNITELEC</div>
+        <div class="login-card-logo-sub">Unión de Técnicos Electromecánicos</div>
+      </div>
+      <div class="login-card-divider"></div>
+      <div class="login-card-title">Bienvenido de nuevo</div>
+      <div class="login-card-subtitle">Inicia sesión para continuar</div>
+
+      <label class="login-field-label">Correo Corporativo *</label>
+      <div class="login-field-wrap">
+        <span class="login-field-icon">✉</span>
+        <input type="email" id="login-email" class="login-input-field" placeholder="nombre@unitelec.com.pe" autocomplete="email" />
+      </div>
+
+      <label class="login-field-label">Contraseña *</label>
+      <div class="login-field-wrap">
+        <span class="login-field-icon">🔒</span>
+        <input type="password" id="login-password" class="login-input-field" placeholder="Contraseña" style="padding-right:44px;" />
+        <span id="ojo" onclick="togglePassword()" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer;color:rgba(255,255,255,0.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </span>
+      </div>
+
+      <button class="btn-login" onclick="login()">Iniciar sesión →</button>
+
+      <div class="login-ms-divider">o continúa con</div>
+      <button class="login-ms-btn" type="button">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" width="16" height="16" />
+        Microsoft
+      </button>
+
+      <div class="login-error" id="login-error"></div>
+      <div class="login-box" style="display:none;"></div>
+    </div>
+  </div>
+
+  <div class="login-footer">
+    <span class="login-footer-copy">© 2025 UNITELEC HSE. Todos los derechos reservados.</span>
+    <div class="login-footer-badge">
+      <div class="login-footer-badge-icon">🛡️</div>
+      <span>Seguridad · Nuestro compromiso, tu protección</span>
+    </div>
   </div>
 </div>
 
