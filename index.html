@@ -1437,7 +1437,25 @@ function toggleSeccion(sec) {
 
 function aplicarEstadoGeneral(sec, val) {
   if (!val || val === 'Mixto') return;
-  const items = sec === 'vg' ? itemsVG : sec === 'ge' ? itemsGE : itemsRE;
+  const mapa = {
+    'vg':   itemsVG,
+    'rel':  itemsREL,
+    'ca':   itemsCA,
+    'co':   itemsCO,
+    'gi':   itemsGI,
+    'at':   itemsAT,
+    're':   itemsRE,
+    'rq':   itemsRQ,
+    'ri':   itemsRI,
+    'ec':   itemsEC,
+    'rex':  itemsREX,
+    'rc':   itemsRC,
+    'resc': itemsRESC,
+    'pp':   itemsPP,
+    'ge':   itemsGE
+  };
+  const items = mapa[sec];
+  if (!items) return;
   items.forEach(item => setResp(item.id, val));
 }
 
