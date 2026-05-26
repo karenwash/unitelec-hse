@@ -345,6 +345,46 @@
   @keyframes spin { to { transform: rotate(360deg); } }
  
  select { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+ .rev-card {
+  background: rgba(255,255,255,0.82); backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.7); border-radius: 28px;
+  margin-bottom: 20px; overflow: hidden;
+  box-shadow: 0 12px 40px rgba(15,23,42,0.08);
+  transition: all 0.25s ease;
+}
+.rev-card:hover { transform: translateY(-2px); box-shadow: 0 18px 48px rgba(15,23,42,0.12); }
+
+.rev-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px; cursor: pointer; user-select: none; transition: filter 0.2s;
+}
+.rev-card-header:hover { filter: brightness(1.1); }
+
+.rev-card-title { font-size: 15px; font-weight: 800; color: white; display: flex; align-items: center; gap: 10px; }
+.rev-card-arrow { font-size: 18px; color: white; transition: transform 0.3s; }
+.rev-card-arrow.collapsed { transform: rotate(-90deg); }
+
+.rev-card-body { padding: 0 24px; max-height: 2000px; transition: max-height 0.4s ease, padding 0.3s ease; overflow: hidden; }
+.rev-card-body.collapsed { max-height: 0; padding: 0 24px; }
+
+.rev-item-row {
+  display: flex; align-items: flex-start; padding: 10px 0;
+  border-bottom: 1px solid #eee; gap: 12px; transition: background 0.2s;
+  border-radius: 8px; padding: 10px 8px;
+}
+.rev-item-row:hover { background: #f8fafc; }
+
+.rev-badge {
+  padding: 3px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 800; white-space: nowrap;
+  color: white; flex-shrink: 0;
+}
+.rev-btn-editar {
+  padding: 6px 14px; color: white; border: none;
+  border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600; transition: all 0.2s; white-space: nowrap;
+}
+.rev-btn-editar:hover { filter: brightness(1.2); transform: translateY(-1px); }
 </style>
 </head>
 <body>
@@ -1023,141 +1063,215 @@
       <div id="rev-datos"></div>
     </div>
 
-    <!-- VERIFICACIÓN GENERAL -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    ✅ Verificación General
-    <button onclick="editarSeccion('vg')" style="padding:6px 14px;background:#163B69;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+   <!-- VERIFICACIÓN GENERAL -->
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#163B69,#2D6CDF);" onclick="toggleRevCard('vg')">
+    <div class="rev-card-title">✅ Verificación General</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('vg')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-vg">▼</span>
+    </div>
   </div>
-  <div id="rev-vg"></div>
+  <div class="rev-card-body" id="rev-body-vg">
+    <div id="rev-vg" style="padding:8px 0;"></div>
+  </div>
 </div>
 
 <!-- RIESGO ELÉCTRICO -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    ⚡ Riesgo Eléctrico
-    <button onclick="editarSeccion('rel')" style="padding:6px 14px;background:#92400E;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#92400E,#D97706);" onclick="toggleRevCard('rel')">
+    <div class="rev-card-title">⚡ Riesgo Eléctrico</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('rel')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-rel">▼</span>
+    </div>
   </div>
-  <div id="rev-rel"></div>
+  <div class="rev-card-body" id="rev-body-rel">
+    <div id="rev-rel" style="padding:8px 0;"></div>
+  </div>
 </div>
 
 <!-- CAÍDA DE ALTURA -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    🧗 Caída de Altura
-    <button onclick="editarSeccion('ca')" style="padding:6px 14px;background:#7F1D1D;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#7F1D1D,#DC2626);" onclick="toggleRevCard('ca')">
+    <div class="rev-card-title">🧗 Caída de Altura</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('ca')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-ca">▼</span>
+    </div>
   </div>
-  <div id="rev-ca"></div>
+  <div class="rev-card-body" id="rev-body-ca">
+    <div id="rev-ca" style="padding:8px 0;"></div>
+  </div>
 </div>
 
 <!-- CAÍDA/IMPACTO DE OBJETOS -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    🪨 Caída/Impacto de Objetos
-    <button onclick="editarSeccion('co')" style="padding:6px 14px;background:#78350F;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#78350F,#B45309);" onclick="toggleRevCard('co')">
+    <div class="rev-card-title">🪨 Caída/Impacto de Objetos</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('co')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-co">▼</span>
+    </div>
   </div>
-  <div id="rev-co"></div>
+  <div class="rev-card-body" id="rev-body-co">
+    <div id="rev-co" style="padding:8px 0;"></div>
+  </div>
 </div>
 
 <!-- GESTIÓN DE INTERFERENCIAS -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    🔀 Gestión de Interferencias
-    <button onclick="editarSeccion('gi')" style="padding:6px 14px;background:#14532D;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#14532D,#16A34A);" onclick="toggleRevCard('gi')">
+    <div class="rev-card-title">🔀 Gestión de Interferencias</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('gi')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-gi">▼</span>
+    </div>
   </div>
-  <div id="rev-gi"></div>
+  <div class="rev-card-body" id="rev-body-gi">
+    <div id="rev-gi" style="padding:8px 0;"></div>
+  </div>
 </div>
 
 <!-- ATRAPAMIENTO -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    🦾 Atrapamiento
-    <button onclick="editarSeccion('at')" style="padding:6px 14px;background:#1E3A5F;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#1E3A5F,#2563EB);" onclick="toggleRevCard('at')">
+    <div class="rev-card-title">🦾 Atrapamiento</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('at')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-at">▼</span>
+    </div>
   </div>
-  <div id="rev-at"></div>
+  <div class="rev-card-body" id="rev-body-at">
+    <div id="rev-at" style="padding:8px 0;"></div>
+  </div>
 </div>
 
 <!-- RIESGO DE EXCAVACIÓN -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    ⛏️ Riesgo de Excavación
-    <button onclick="editarSeccion('re')" style="padding:6px 14px;background:#78350F;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#78350F,#C2410C);" onclick="toggleRevCard('re')">
+    <div class="rev-card-title">⛏️ Riesgo de Excavación</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('re')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-re">▼</span>
+    </div>
   </div>
-  <div id="rev-re"></div>
+  <div class="rev-card-body" id="rev-body-re">
+    <div id="rev-re" style="padding:8px 0;"></div>
+  </div>
 </div>
 
 <!-- RIESGO QUÍMICO -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    🧪 Riesgo Químico
-    <button onclick="editarSeccion('rq')" style="padding:6px 14px;background:#14532D;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#14532D,#15803D);" onclick="toggleRevCard('rq')">
+    <div class="rev-card-title">🧪 Riesgo Químico</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('rq')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-rq">▼</span>
+    </div>
   </div>
-  <div id="rev-rq"></div>
+  <div class="rev-card-body" id="rev-body-rq">
+    <div id="rev-rq" style="padding:8px 0;"></div>
+  </div>
 </div>
 
 <!-- RIESGO DE INCENDIO -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    🔥 Riesgo de Incendio
-    <button onclick="editarSeccion('ri')" style="padding:6px 14px;background:#7F1D1D;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#7F1D1D,#B91C1C);" onclick="toggleRevCard('ri')">
+    <div class="rev-card-title">🔥 Riesgo de Incendio</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('ri')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-ri">▼</span>
+    </div>
   </div>
-  <div id="rev-ri"></div>
+  <div class="rev-card-body" id="rev-body-ri">
+    <div id="rev-ri" style="padding:8px 0;"></div>
+  </div>
 </div>
 
 <!-- ESPACIOS CONFINADOS -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    🕳️ Espacios Confinados
-    <button onclick="editarSeccion('ec')" style="padding:6px 14px;background:#1C1917;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#1C1917,#44403C);" onclick="toggleRevCard('ec')">
+    <div class="rev-card-title">🕳️ Espacios Confinados</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('ec')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-ec">▼</span>
+    </div>
   </div>
-  <div id="rev-ec"></div>
+  <div class="rev-card-body" id="rev-body-ec">
+    <div id="rev-ec" style="padding:8px 0;"></div>
+  </div>
 </div>
 
 <!-- RIESGO DE EXPLOSIÓN -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    💥 Riesgo de Explosión
-    <button onclick="editarSeccion('rex')" style="padding:6px 14px;background:#C55A11;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#C55A11,#EA580C);" onclick="toggleRevCard('rex')">
+    <div class="rev-card-title">💥 Riesgo de Explosión</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('rex')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-rex">▼</span>
+    </div>
   </div>
-  <div id="rev-rex"></div>
+  <div class="rev-card-body" id="rev-body-rex">
+    <div id="rev-rex" style="padding:8px 0;"></div>
+  </div>
 </div>
 
 <!-- RIESGO DE CORTES -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    🔪 Riesgo de Cortes
-    <button onclick="editarSeccion('rc')" style="padding:6px 14px;background:#831843;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#831843,#BE185D);" onclick="toggleRevCard('rc')">
+    <div class="rev-card-title">🔪 Riesgo de Cortes</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('rc')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-rc">▼</span>
+    </div>
   </div>
-  <div id="rev-rc"></div>
+  <div class="rev-card-body" id="rev-body-rc">
+    <div id="rev-rc" style="padding:8px 0;"></div>
+  </div>
 </div>
 
 <!-- ESTRÉS POR CALOR -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    🌡️ Estrés por Calor
-    <button onclick="editarSeccion('resc')" style="padding:6px 14px;background:#0C4A6E;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#0C4A6E,#0284C7);" onclick="toggleRevCard('resc')">
+    <div class="rev-card-title">🌡️ Estrés por Calor</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('resc')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-resc">▼</span>
+    </div>
   </div>
-  <div id="rev-resc"></div>
+  <div class="rev-card-body" id="rev-body-resc">
+    <div id="rev-resc" style="padding:8px 0;"></div>
+  </div>
 </div>
 
 <!-- PROYECCIÓN DE PARTÍCULAS -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    🌪️ Proyección de Partículas / Fluidos
-    <button onclick="editarSeccion('pp')" style="padding:6px 14px;background:#3730A3;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#3730A3,#4F46E5);" onclick="toggleRevCard('pp')">
+    <div class="rev-card-title">🌪️ Proyección de Partículas / Fluidos</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('pp')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-pp">▼</span>
+    </div>
   </div>
-  <div id="rev-pp"></div>
+  <div class="rev-card-body" id="rev-body-pp">
+    <div id="rev-pp" style="padding:8px 0;"></div>
+  </div>
 </div>
 
 <!-- GESTIÓN DE EMERGENCIAS -->
-<div class="card">
-  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-    🚨 Gestión de Emergencias
-    <button onclick="editarSeccion('ge')" style="padding:6px 14px;background:#6B2C91;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+<div class="rev-card">
+  <div class="rev-card-header" style="background:linear-gradient(135deg,#6B2C91,#9333EA);" onclick="toggleRevCard('ge')">
+    <div class="rev-card-title">🚨 Gestión de Emergencias</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="rev-btn-editar" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);" onclick="event.stopPropagation();editarSeccion('ge')">✏️ Editar</button>
+      <span class="rev-card-arrow" id="rev-arrow-ge">▼</span>
+    </div>
   </div>
-  <div id="rev-ge"></div>
+  <div class="rev-card-body" id="rev-body-ge">
+    <div id="rev-ge" style="padding:8px 0;"></div>
+  </div>
 </div>
-
     <!-- BOTONES -->
     <div style="display:flex;gap:12px;margin-top:10px;">
       <button onclick="volverFormulario()" style="flex:1;padding:16px;background:#666;color:white;border:none;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer;">
@@ -1535,7 +1649,12 @@ function setResp(id, val) {
   document.getElementById(`btn-${id}-${m[val]}`)?.classList.add('active');
   updateProgress();
 }
-
+function toggleRevCard(sec) {
+  const body = document.getElementById(`rev-body-${sec}`);
+  const arrow = document.getElementById(`rev-arrow-${sec}`);
+  body.classList.toggle('collapsed');
+  arrow.classList.toggle('collapsed');
+}
 function toggleSeccion(sec) {
   const content = document.getElementById(`content-${sec}`);
   const arrow = document.getElementById(`arrow-${sec}`);
