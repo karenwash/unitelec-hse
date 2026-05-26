@@ -1024,31 +1024,139 @@
     </div>
 
     <!-- VERIFICACIÓN GENERAL -->
-    <div class="card">
-      <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-        ✅ Verificación General
-        <button onclick="editarSeccion('vg')" style="padding:6px 14px;background:#1F4E79;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
-      </div>
-      <div id="rev-vg"></div>
-    </div>
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    ✅ Verificación General
+    <button onclick="editarSeccion('vg')" style="padding:6px 14px;background:#163B69;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-vg"></div>
+</div>
 
-    <!-- GESTIÓN EMERGENCIAS -->
-    <div class="card">
-      <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-        🚨 Gestión de Emergencias
-        <button onclick="editarSeccion('ge')" style="padding:6px 14px;background:#C55A11;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
-      </div>
-      <div id="rev-ge"></div>
-    </div>
+<!-- RIESGO ELÉCTRICO -->
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    ⚡ Riesgo Eléctrico
+    <button onclick="editarSeccion('rel')" style="padding:6px 14px;background:#92400E;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-rel"></div>
+</div>
 
-    <!-- RIESGO EXCAVACIÓN -->
-    <div class="card">
-      <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
-        ⛏️ Riesgo de Excavación
-        <button onclick="editarSeccion('re')" style="padding:6px 14px;background:#6B2C91;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
-      </div>
-      <div id="rev-re"></div>
-    </div>
+<!-- CAÍDA DE ALTURA -->
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    🧗 Caída de Altura
+    <button onclick="editarSeccion('ca')" style="padding:6px 14px;background:#7F1D1D;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-ca"></div>
+</div>
+
+<!-- CAÍDA/IMPACTO DE OBJETOS -->
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    🪨 Caída/Impacto de Objetos
+    <button onclick="editarSeccion('co')" style="padding:6px 14px;background:#78350F;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-co"></div>
+</div>
+
+<!-- GESTIÓN DE INTERFERENCIAS -->
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    🔀 Gestión de Interferencias
+    <button onclick="editarSeccion('gi')" style="padding:6px 14px;background:#14532D;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-gi"></div>
+</div>
+
+<!-- ATRAPAMIENTO -->
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    🦾 Atrapamiento
+    <button onclick="editarSeccion('at')" style="padding:6px 14px;background:#1E3A5F;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-at"></div>
+</div>
+
+<!-- RIESGO DE EXCAVACIÓN -->
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    ⛏️ Riesgo de Excavación
+    <button onclick="editarSeccion('re')" style="padding:6px 14px;background:#78350F;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-re"></div>
+</div>
+
+<!-- RIESGO QUÍMICO -->
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    🧪 Riesgo Químico
+    <button onclick="editarSeccion('rq')" style="padding:6px 14px;background:#14532D;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-rq"></div>
+</div>
+
+<!-- RIESGO DE INCENDIO -->
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    🔥 Riesgo de Incendio
+    <button onclick="editarSeccion('ri')" style="padding:6px 14px;background:#7F1D1D;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-ri"></div>
+</div>
+
+<!-- ESPACIOS CONFINADOS -->
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    🕳️ Espacios Confinados
+    <button onclick="editarSeccion('ec')" style="padding:6px 14px;background:#1C1917;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-ec"></div>
+</div>
+
+<!-- RIESGO DE EXPLOSIÓN -->
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    💥 Riesgo de Explosión
+    <button onclick="editarSeccion('rex')" style="padding:6px 14px;background:#C55A11;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-rex"></div>
+</div>
+
+<!-- RIESGO DE CORTES -->
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    🔪 Riesgo de Cortes
+    <button onclick="editarSeccion('rc')" style="padding:6px 14px;background:#831843;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-rc"></div>
+</div>
+
+<!-- ESTRÉS POR CALOR -->
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    🌡️ Estrés por Calor
+    <button onclick="editarSeccion('resc')" style="padding:6px 14px;background:#0C4A6E;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-resc"></div>
+</div>
+
+<!-- PROYECCIÓN DE PARTÍCULAS -->
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    🌪️ Proyección de Partículas / Fluidos
+    <button onclick="editarSeccion('pp')" style="padding:6px 14px;background:#3730A3;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-pp"></div>
+</div>
+
+<!-- GESTIÓN DE EMERGENCIAS -->
+<div class="card">
+  <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+    🚨 Gestión de Emergencias
+    <button onclick="editarSeccion('ge')" style="padding:6px 14px;background:#6B2C91;color:white;border:none;border-radius:6px;cursor:pointer;font-size:12px;">✏️ Editar</button>
+  </div>
+  <div id="rev-ge"></div>
+</div>
 
     <!-- BOTONES -->
     <div style="display:flex;gap:12px;margin-top:10px;">
@@ -1624,9 +1732,21 @@ function mostrarRevision() {
     }).join('');
   };
 
-  renderRevItems(itemsVG, 'rev-vg');
-  renderRevItems(itemsGE, 'rev-ge');
-  renderRevItems(itemsRE, 'rev-re');
+renderRevItems(itemsVG,   'rev-vg');
+renderRevItems(itemsREL,  'rev-rel');
+renderRevItems(itemsCA,   'rev-ca');
+renderRevItems(itemsCO,   'rev-co');
+renderRevItems(itemsGI,   'rev-gi');
+renderRevItems(itemsAT,   'rev-at');
+renderRevItems(itemsRE,   'rev-re');
+renderRevItems(itemsRQ,   'rev-rq');
+renderRevItems(itemsRI,   'rev-ri');
+renderRevItems(itemsEC,   'rev-ec');
+renderRevItems(itemsREX,  'rev-rex');
+renderRevItems(itemsRC,   'rev-rc');
+renderRevItems(itemsRESC, 'rev-resc');
+renderRevItems(itemsPP,   'rev-pp');
+renderRevItems(itemsGE,   'rev-ge');
 
   document.getElementById('form-screen').style.display = 'none';
   document.getElementById('revision-screen').style.display = 'block';
@@ -1648,9 +1768,21 @@ function editarSeccion(seccion) {
   setTimeout(() => {
     const ids = {
       'datos': 'area_inspectora',
-      'vg': 'items-vg',
-      'ge': 'items-ge',
-      're': 'items-re'
+      'vg':   'items-vg',
+      'rel':  'items-rel',
+      'ca':   'items-ca',
+      'co':   'items-co',
+      'gi':   'items-gi',
+      'at':   'items-at',
+      're':   'items-re',
+      'rq':   'items-rq',
+      'ri':   'items-ri',
+      'ec':   'items-ec',
+      'rex':  'items-rex',
+      'rc':   'items-rc',
+      'resc': 'items-resc',
+      'pp':   'items-pp',
+      'ge':   'items-ge'
     };
     const el = document.getElementById(ids[seccion]);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
